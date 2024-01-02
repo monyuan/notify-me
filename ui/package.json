@@ -13,6 +13,7 @@
   "dependencies": {
     "@halo-dev/components": "^1.10.0",
     "@halo-dev/console-shared": "^2.11.0",
+    "axios": "^1.6.3",
     "canvas-confetti": "^1.9.2",
     "vue": "^3.3.12"
   },
