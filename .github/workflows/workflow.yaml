@@ -1,8 +1,7 @@
 name: Build Plugin JAR File
 
 on:
-  push:
-    branches: [ main ]
+  workflow_dispatch:
   release:
     types:
       - created
@@ -83,7 +82,7 @@ jobs:
         uses: actions/github-script@v2
         if: github.event_name == 'release'
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{secrets.MY_TOKEN}}
           script: |
             console.log('environment', process.versions);
 
