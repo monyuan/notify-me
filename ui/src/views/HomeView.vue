@@ -55,7 +55,7 @@ export default {
           this.data
         )
           .then((response) => {
-            if (response.status == 200) {
+            if (response.status == 201) {
               this.saveTip = true
             }
             this.getData();
@@ -63,8 +63,9 @@ export default {
       } else {
         http.post("/apis/org.xiqi.notifyme/v1alpha1/notifymes", this.data)
           .then((response) => {
-            if (response.status == 200) {
+            if (response.status == 201) {
               this.saveTip = true
+              this.update = true
             }
           })
       }
