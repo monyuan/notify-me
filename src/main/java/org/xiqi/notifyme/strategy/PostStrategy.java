@@ -47,14 +47,15 @@ public class PostStrategy implements NotifyStrategy {
                 }
 
             });
-        }, 3, TimeUnit.SECONDS);
+        }, 4, TimeUnit.SECONDS);
         executorService.shutdown();
     }
 
     private void publish(Post post, NotifyMe setting) { // 文章发布通知
         if (setting.getPostStatus()) {
-            String title = "有新文章: " + post.getSpec().getTitle();
-            String content = "您的站点有新文章发布，文章链接: " + String.format("[文章链接](%s)",
+            String title = "有新文章发布";
+            String content = "您的站点有新文章发布：" + String.format("[%s](%s)",
+                post.getSpec().getTitle(),
                 setting.getSiteUrl() + post.getStatus().getPermalink());
             push(title, content, setting);
         }

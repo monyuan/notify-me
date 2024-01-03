@@ -40,7 +40,6 @@ public class NotifyListener implements ApplicationListener<NotifyBaseEvent> {
     }
 
     private NotifyStrategy getStrategyForExtension(Extension extension) {
-        System.out.println(extension);
         if (extension instanceof Post) {
             return postStrategy;
         }
