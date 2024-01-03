@@ -7,6 +7,17 @@
  - 使用了AnPush推送服务，有免费额度，个人博客够用
  - 不够用可以多注册几个账号薅羊毛，但是不建议，多支持下开发者
 
+## 使用提示
+
+安装插件后，会在halo后台左侧生成一个"通知我"的菜单(往下拉)，然后点击进入设置页面。
+
+ - 站点地址就是你的域名，比如：https://baidu.com
+ - API密钥 [在这里获取](https://anpush.com/ApPush)
+ - 通道ID [在这里获取](https://anpush.com/ApChannel)
+
+没用过AnPush建议看看官网帮助，通过ID和API密钥不要填错了
+
+
 本来准备使用server酱，但是免费额度太低了还不灵活，就用了AnPush
 
 注册完 [AnPush](https://anpush.com/welcome) 账号在后台这个地方把密钥填入插件内
