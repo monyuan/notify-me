@@ -1,4 +1,4 @@
-package run.halo.notifyme.listener;
+package org.xiqi.notifyme.listener;
 
 
 import lombok.NonNull;
@@ -7,15 +7,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import org.xiqi.notifyme.domain.NotifyMe;
+import org.xiqi.notifyme.event.NotifyBaseEvent;
+import org.xiqi.notifyme.strategy.CommentStrategy;
+import org.xiqi.notifyme.strategy.NotifyStrategy;
+import org.xiqi.notifyme.strategy.PostStrategy;
 import run.halo.app.core.extension.content.Comment;
 import run.halo.app.core.extension.content.Post;
 import run.halo.app.extension.Extension;
 import run.halo.app.extension.ExtensionClient;
-import run.halo.notifyme.domain.NotifyMe;
-import run.halo.notifyme.event.NotifyBaseEvent;
-import run.halo.notifyme.strategy.CommentStrategy;
-import run.halo.notifyme.strategy.NotifyStrategy;
-import run.halo.notifyme.strategy.PostStrategy;
 import java.util.Optional;
 
 @Slf4j
@@ -40,6 +40,7 @@ public class NotifyListener implements ApplicationListener<NotifyBaseEvent> {
     }
 
     private NotifyStrategy getStrategyForExtension(Extension extension) {
+        System.out.println(extension);
         if (extension instanceof Post) {
             return postStrategy;
         }

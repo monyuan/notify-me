@@ -1,12 +1,12 @@
-package run.halo.notifyme;
+package org.xiqi.notifyme;
 
 import org.pf4j.PluginWrapper;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
+import org.xiqi.notifyme.domain.NotifyMe;
 import run.halo.app.extension.Scheme;
 import run.halo.app.plugin.BasePlugin;
 import run.halo.app.extension.SchemeManager;
-import run.halo.notifyme.domain.NotifyMe;
 
 @Component
 @EnableAsync

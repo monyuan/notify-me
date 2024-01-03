@@ -1,4 +1,4 @@
-package run.halo.notifyme.domain;
+package org.xiqi.notifyme.domain;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -10,7 +10,7 @@ import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode.REQUIRED;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@GVK(kind = "NotifyMe", group = "notifyme.plugin.halo.run",
+@GVK(kind = "NotifyMe", group = "org.xiqi.notifyme",
     version = "v1alpha1", singular = "notifyme", plural = "notifymes")
 public class NotifyMe extends AbstractExtension {
 

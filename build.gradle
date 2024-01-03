@@ -5,7 +5,7 @@ plugins {
     id "run.halo.plugin.devtools" version "0.0.7"
 }
 
-group 'notifyme.plugin.halo.run'
+group 'org.xiqi.notifyme'
 sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {

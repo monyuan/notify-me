@@ -1,12 +1,12 @@
-package run.halo.notifyme.util;
+package org.xiqi.notifyme.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import run.halo.notifyme.domain.NotifyMe;
-import run.halo.notifyme.domain.PushDo;
+import org.xiqi.notifyme.domain.NotifyMe;
+import org.xiqi.notifyme.domain.PushDo;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 

@@ -1,4 +1,4 @@
-package run.halo.notifyme.event;
+package org.xiqi.notifyme.event;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

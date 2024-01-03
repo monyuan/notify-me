@@ -21,7 +21,7 @@ export default {
         postStatus: false,
         commentAuditsStatus: false,
         postAuditsStatus: false,
-        apiVersion: "notifyme.plugin.halo.run/v1alpha1",
+        apiVersion: "org.xiqi.notifyme/v1alpha1",
         kind: "NotifyMe",
         metadata: {
           name: "notify-config"
@@ -39,20 +39,19 @@ export default {
     },
 
     getData() {
-      http.get("/apis/notifyme.plugin.halo.run/v1alpha1/notifymes")
+      http.get("/apis/org.xiqi.notifyme/v1alpha1/notifymes")
         .then((res) => {
           if (res.data.items.length > 0) {
             this.data = res.data.items[0]
-            if (this.data.siteUrl.length < 3) {
-              this.getSiteUrl()
-            }
             this.update = true
+          }else {
+            this.getSiteUrl()
           }
         });
     },
     createData() {
       if (this.update) {
-        http.put("/apis/notifyme.plugin.halo.run/v1alpha1/notifymes/notify-config",
+        http.put("/apis/org.xiqi.notifyme/v1alpha1/notifymes/notify-config",
           this.data
         )
           .then((response) => {
@@ -62,7 +61,7 @@ export default {
             this.getData();
           });
       } else {
-        http.post("/apis/notifyme.plugin.halo.run/v1alpha1/notifymes", this.data)
+        http.post("/apis/org.xiqi.notifyme/v1alpha1/notifymes", this.data)
           .then((response) => {
             if (response.status == 200) {
               this.saveTip = true

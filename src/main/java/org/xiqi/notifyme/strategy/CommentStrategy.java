@@ -1,15 +1,15 @@
-package run.halo.notifyme.strategy;
+package org.xiqi.notifyme.strategy;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.xiqi.notifyme.domain.NotifyMe;
+import org.xiqi.notifyme.domain.PushDo;
+import org.xiqi.notifyme.event.NotifyBaseEvent;
 import run.halo.app.core.extension.content.Comment;
 import run.halo.app.core.extension.content.Post;
-import run.halo.notifyme.domain.NotifyMe;
-import run.halo.notifyme.domain.PushDo;
-import run.halo.notifyme.event.NotifyBaseEvent;
 import java.util.Optional;
 import run.halo.app.extension.ExtensionClient;
-import run.halo.notifyme.util.PushUtil;
+import org.xiqi.notifyme.util.PushUtil;
 
 @Component
 @RequiredArgsConstructor

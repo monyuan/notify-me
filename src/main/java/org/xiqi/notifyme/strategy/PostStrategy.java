@@ -1,16 +1,19 @@
-package run.halo.notifyme.strategy;
+package org.xiqi.notifyme.strategy;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.xiqi.notifyme.domain.NotifyMe;
+import org.xiqi.notifyme.domain.PushDo;
+import org.xiqi.notifyme.event.NotifyBaseEvent;
+import org.xiqi.notifyme.util.PushUtil;
 import run.halo.app.core.extension.content.Post;
 import run.halo.app.extension.Extension;
 import run.halo.app.extension.ExtensionClient;
-import run.halo.notifyme.domain.NotifyMe;
-import run.halo.notifyme.domain.PushDo;
-import run.halo.notifyme.event.NotifyBaseEvent;
-import run.halo.notifyme.util.PushUtil;
 import java.util.Optional;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 
 @Component
@@ -21,30 +24,31 @@ public class PostStrategy implements NotifyStrategy {
 
     private final PushUtil pushUtil;
 
+    private Integer counter = 0;
+
     @Override
     public void process(NotifyBaseEvent event, NotifyMe setting) {
+        /*
+        TODO 等halo出了文章发布后的事件，这里再改下
+        这里其实是落库前的数据,目前是发布前的事件，是取不到文章链接的。
+        放到异步队列里，3秒后执行，基本都会成功，不成功也无伤大雅
+         */
         Extension extension = event.getExtension();
-
-        try {
-            Thread.sleep(1000);  //这里有个问题，通知是halo先发的，内部还没有完成文章发布，导致获取的是空的，只能先等待1秒
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+        executorService.schedule(() -> {
             Optional<Post> postInfo = client.fetch(Post.class, extension.getMetadata().getName());
             postInfo.ifPresent(post -> {
-                if (post.getStatus() == null) {
-                    process(event, setting);
-                } else {
-                    if (post.getStatus().getPhase().equals("DRAFT") && !post.getSpec().getOwner()
-                        .equals("admin")) { // 管理员的不管
-                        audits(post, setting);
-                    }
-                    if (post.getStatus().getPhase().equals("PUBLISHED")) {
-                        publish(post, setting);
-                    }
+                if (post.getStatus().getPhase().equals("DRAFT") && !post.getSpec().getOwner()
+                    .equals("admin")) { // 管理员的不管
+                    audits(post, setting);
                 }
-            });
-        } catch (InterruptedException e) {
-            log.error(e.getMessage());
-        }
+                if (post.getStatus().getPhase().equals("PUBLISHED")) {
+                    publish(post, setting);
+                }
 
+            });
+        }, 3, TimeUnit.SECONDS);
+        executorService.shutdown();
     }
 
     private void publish(Post post, NotifyMe setting) { // 文章发布通知

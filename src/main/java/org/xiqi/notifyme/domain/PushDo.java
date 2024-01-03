@@ -1,4 +1,4 @@
-package run.halo.notifyme.domain;
+package org.xiqi.notifyme.domain;
 
 
 import lombok.Data;

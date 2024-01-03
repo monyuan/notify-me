@@ -1,7 +1,6 @@
 apiVersion: plugin.halo.run/v1alpha1
 kind: Plugin
 metadata:
-  # The name defines how the plugin is invoked,A unique name
   name: notifyme
 spec:
   enabled: true
@@ -9,10 +8,10 @@ spec:
   author:
     name: 稀奇
     website: https://xiqi.org
-  logo: https://i0.wp.com/raw.githubusercontent.com/monyuan/notify-me/main/ui/src/assets/notify.png
+  logo: /notify.png
   homepage: https://github.com/monyuan/notify-me
   displayName: "通知我"
   description: "当有评论时推送通知到微信、企业微信、飞书、钉钉、微信测试号、Slack等12个应用，使用了AnPush服务。"
   license:
     - name: "GPL-3.0"
-      url: "https://github.com/halo-dev/plugin-starter/blob/main/LICENSE"
+      url: "https://raw.githubusercontent.com/monyuan/notify-me/main/LICENSE"
