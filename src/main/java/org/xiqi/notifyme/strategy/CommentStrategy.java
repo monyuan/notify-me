@@ -26,10 +26,13 @@ public class CommentStrategy implements NotifyStrategy {
             String postMetaName = commentSpec.getSubjectRef().getName();
             Optional<Post> postInfo = client.fetch(Post.class, postMetaName);
             postInfo.ifPresent(post -> {
-                if (!commentSpec.getApproved()) { //等待审核的
-                    audits(post, setting, commentSpec);
-                } else {
-                    publish(post, setting, commentSpec);
+                if (!commentSpec.getOwner().getName().equals(post.getSpec().getOwner())) {
+                    // 文章作者自己回复的不推送通知
+                    if (!commentSpec.getApproved()) { //等待审核的
+                        audits(post, setting, commentSpec);
+                    } else {
+                        publish(post, setting, commentSpec);
+                    }
                 }
             });
 
