@@ -11,7 +11,7 @@ spec:
   logo: /notify.png
   homepage: https://github.com/monyuan/notify-me
   displayName: "通知我"
-  description: "当有评论时推送通知到微信、企业微信、飞书、钉钉、微信测试号、Slack等12个应用，使用了AnPush服务。"
+  description: "当有评论时、新闻章时推送通知到微信、企业微信、飞书、钉钉、微信测试号、Slack等12个应用，使用了AnPush服务。"
   license:
     - name: "GPL-3.0"
       url: "https://raw.githubusercontent.com/monyuan/notify-me/main/LICENSE"

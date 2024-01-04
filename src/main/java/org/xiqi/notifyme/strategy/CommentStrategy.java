@@ -37,8 +37,11 @@ public class CommentStrategy implements NotifyStrategy {
     }
 
     private void publish(Post post, NotifyMe setting, Comment.CommentSpec commentSpec) { // 评论发布通知
+        String title = String.format("《%s》上有新评论发布", post.getSpec().getTitle());
         if (setting.getCommentStatus()) {
-            String title = String.format("《%s》上有新评论", post.getSpec().getTitle());
+            if (setting.getWechatStatus()) {
+                title = "你有新评论"; // 微信模板消息anpush做了限制，不能太长
+            }
             String content = String.format("%s说: %s \n\n[查看评论](%s)",
                 commentSpec.getOwner().getDisplayName(),
                 commentSpec.getContent(),
@@ -51,6 +54,9 @@ public class CommentStrategy implements NotifyStrategy {
     private void audits(Post post, NotifyMe setting, Comment.CommentSpec commentSpec) { // 评论审核通知
         if (setting.getCommentAuditsStatus()) {
             String title = String.format("《%s》上有新评论等待审核", post.getSpec().getTitle());
+            if (setting.getWechatStatus()) {
+                title = "新评论待审核"; // 微信模板消息anpush做了限制，不能太长
+            }
             String content = String.format("%s说: %s \n\n[现在去审核](%s)",
                 commentSpec.getOwner().getDisplayName(),
                 commentSpec.getContent(),

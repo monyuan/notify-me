@@ -21,6 +21,7 @@ export default {
         status: false,
         commentStatus: false,
         postStatus: false,
+        wechatStatus: false,
         commentAuditsStatus: false,
         postAuditsStatus: false,
         apiVersion: "org.xiqi.notifyme/v1alpha1",
@@ -219,6 +220,28 @@ export default {
                   <input
                     class="nm-input formkit-input bg-white resize-none w-full text-black block transition-all h-full px-3 text-sm"
                     type="text" v-model="data.channel" placeholder="有多个就用英文逗号隔开"/>
+                </div>
+              </div>
+              <div
+                class="nm-title-container formkit-outer formkit-disabled:opacity-50 py-4 first:pt-0 last:pb-0 transition-all">
+                <div class="nm-checkbox-title">
+                  <svg style="display: inline" viewBox="0 0 24 24" width="20px" height="20px">
+                    <path fill="currentColor"
+                          d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12S6.48 2 12 2Zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8s-8 3.58-8 8s3.58 8 8 8Zm1-8v4h-2v-4H8l4-4l4 4h-3Z">
+                    </path>
+                  </svg>
+                  <span class="icon-title">通道是否是微信公众号</span>
+                  <div style="font-size: 13px;font-weight: normal;color: #8077a4;padding: 5px">
+                    ❗️ 如果你用的通道是微信公众号一定要勾选[其他的不要勾选]，因为微信公众号的模板消息标题长度固定，超出长度无法发送！
+                  </div>
+                </div>
+                <div style="padding: 10px"
+                     class="formkit-inner inline-flex items-center w-full relative box-border border border-gray-300 formkit-invalid:border-red-500 h-9 rounded-base overflow-hidden focus-within:border-primary focus-within:shadow-sm sm:max-w-lg transition-all">
+                  <input class="toggle-all" type="checkbox" :checked="data.wechatStatus"
+                         v-model="data.wechatStatus"/>
+                  <label for="toggle-all"><span class="nm-checkbox-text"
+                                                style="font-size: 14px;color: red;vertical-align: 1px">
+                    是</span></label>
                 </div>
               </div>
               <div

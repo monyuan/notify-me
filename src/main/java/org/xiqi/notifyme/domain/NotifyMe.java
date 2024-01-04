@@ -26,6 +26,9 @@ public class NotifyMe extends AbstractExtension {
     @Schema(defaultValue = "false")
     private Boolean status; // 通知总开关
 
+    @Schema(defaultValue = "false")
+    private Boolean wechatStatus; // 微信标记
+
     @Schema(defaultValue = "true")
     private Boolean commentStatus; // 评论通知开关
 

@@ -63,7 +63,7 @@ public class PostStrategy implements NotifyStrategy {
 
     private void audits(Post post, NotifyMe setting) { // 文章审核通知
         if (setting.getPostAuditsStatus()) {
-            String title = "有新文章等待审核: " + post.getSpec().getTitle();
+            String title = "有新文章待审核: " + post.getSpec().getTitle();
             String content = "您的站点有新文文章等待审核，\n\n " + String.format("[立刻审核](%s)",
                 setting.getSiteUrl() + "/console/posts");
             push(title, content, setting);

@@ -2,8 +2,6 @@
 
 当有新评论、新文章、等待审核的评论、等待审核的文章时将消息推送到微信、企业微信、飞书、钉钉等12个应用
 
-目前还没上架Halo商店，可以在 [Releases](https://github.com/monyuan/notify-me/releases) 页面直接下载
-
  - 使用了AnPush推送服务，有免费额度，个人博客够用
  - 不够用可以多注册几个账号薅羊毛，但是不建议，多支持下开发者
 
@@ -14,6 +12,10 @@
  - 站点地址就是你的域名，比如：https://baidu.com
  - API密钥 [在这里获取](https://anpush.com/ApPush)
  - 通道ID [在这里获取](https://anpush.com/ApChannel)
+
+**注意**
+如果你用的是微信公众号通道，请一定要勾选这个选项，其他通道不要勾选！
+![](https://s2.loli.net/2024/01/04/lDP8N7ejEkv2zfs.png)
 
 没用过AnPush建议看看官网帮助，通过ID和API密钥不要填错了
 
