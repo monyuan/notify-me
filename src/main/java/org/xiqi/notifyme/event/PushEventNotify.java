@@ -26,6 +26,11 @@ public class PushEventNotify implements Watcher, InitializingBean {
     }
 
     @Override
+    public void onDelete(Extension extension) {
+        eventPublisher.publishEvent(NotifyBaseEvent.getEx(this, extension));
+    }
+
+    @Override
     public void registerDisposeHook(Runnable dispose) {
         this.disposeHook = dispose;
     }

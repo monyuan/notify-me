@@ -24,6 +24,7 @@ export default {
         wechatStatus: false,
         commentAuditsStatus: false,
         postAuditsStatus: false,
+        postDelStatus: false,
         apiVersion: "org.xiqi.notifyme/v1alpha1",
         kind: "NotifyMe",
         metadata: {
@@ -154,7 +155,7 @@ export default {
         <div class="!p-0 card-body">
           <div style="padding: 40px;">
             <div class="tip">
-              🎈 通过AnPush的接口实现的通知推送, 免费套餐已足够博客使用。 <a href="https://anpush.com/welcome?halo" target="_blank"
+              🎈 通过AnPush的接口实现的通知推送, 免费套餐已足够博客使用。 <a href="https://anpush.com/?halo" target="_blank"
                                                      style="text-decoration: underline;color: #000000;"> 获取密钥 > </a>
               <br>
               <div>根据官网描述可以推送至12个应用，我测试了微信、企业微信、微信测试号、飞书、钉钉都没有问题</div>
@@ -252,28 +253,33 @@ export default {
                           d="M2 12c0-.865.11-1.704.316-2.504A3 3 0 0 0 4.99 4.867a9.99 9.99 0 0 1 4.335-2.506a3 3 0 0 0 5.348 0a9.99 9.99 0 0 1 4.335 2.506a3 3 0 0 0 2.675 4.63c.206.8.316 1.638.316 2.503c0 .864-.11 1.703-.316 2.503a3 3 0 0 0-2.675 4.63a9.99 9.99 0 0 1-4.335 2.505a3 3 0 0 0-5.348 0a9.99 9.99 0 0 1-4.335-2.505a3 3 0 0 0-2.675-4.63C2.11 13.703 2 12.864 2 12Zm4.804 3c.63 1.091.81 2.346.564 3.524c.408.29.842.541 1.297.75A4.993 4.993 0 0 1 12 18c1.26 0 2.438.471 3.335 1.274c.455-.209.889-.46 1.297-.75A4.993 4.993 0 0 1 17.196 15a4.993 4.993 0 0 1 2.77-2.25a8.142 8.142 0 0 0 0-1.5A4.993 4.993 0 0 1 17.196 9a4.993 4.993 0 0 1-.564-3.524a7.991 7.991 0 0 0-1.297-.75A4.993 4.993 0 0 1 12 6a4.993 4.993 0 0 1-3.335-1.274a7.99 7.99 0 0 0-1.297.75A4.993 4.993 0 0 1 6.804 9a4.993 4.993 0 0 1-2.77 2.25a8.125 8.125 0 0 0 0 1.5A4.993 4.993 0 0 1 6.805 15ZM12 15a3 3 0 1 1 0-6a3 3 0 0 1 0 6Zm0-2a1 1 0 1 0 0-2a1 1 0 0 0 0 2Z">
                     </path>
                   </svg>
-                  <span class="icon-title">功能设置</span>
+                  <span class="icon-title">通知功能设置</span>
                 </div>
                 <div style="padding: 20px;"
                      class="formkit-inner inline-flex items-center w-full relative box-border border border-gray-300 formkit-invalid:border-red-500 h-9 rounded-base overflow-hidden focus-within:border-primary focus-within:shadow-sm sm:max-w-lg transition-all">
                   <div class="nm-checkbox">
                     <input class="toggle-all" type="checkbox" :checked="data.commentStatus"
                            v-model="data.commentStatus"/>
-                    <label for="toggle-all"><span class="nm-checkbox-text">新评论通知</span></label>
+                    <label for="toggle-all"><span class="nm-checkbox-text">新评论</span></label>
                   </div>
                   <div class="nm-checkbox">
                     <input class="toggle-all" type="checkbox" :checked="data.commentAuditsStatus"
                            v-model="data.commentAuditsStatus"/>
-                    <label for="toggle-all"><span class="nm-checkbox-text">评论审核通知</span></label>
+                    <label for="toggle-all"><span class="nm-checkbox-text">评论审核</span></label>
                   </div>
                   <div class="nm-checkbox">
                     <input class="toggle-all" type="checkbox" :checked="data.postStatus" v-model="data.postStatus"/>
-                    <label for="toggle-all"><span class="nm-checkbox-text">文章发布通知</span></label>
+                    <label for="toggle-all"><span class="nm-checkbox-text">文章发布</span></label>
                   </div>
                   <div class="nm-checkbox">
                     <input class="toggle-all" type="checkbox" :checked="data.postAuditsStatus"
                            v-model="data.postAuditsStatus"/>
-                    <label for="toggle-all"><span class="nm-checkbox-text">投稿审核通知</span></label>
+                    <label for="toggle-all"><span class="nm-checkbox-text">投稿审核</span></label>
+                  </div>
+                  <div class="nm-checkbox">
+                    <input class="toggle-all" type="checkbox" :checked="data.postDelStatus"
+                           v-model="data.postDelStatus"/>
+                    <label for="toggle-all"><span class="nm-checkbox-text">文章删除</span></label>
                   </div>
                 </div>
               </div>

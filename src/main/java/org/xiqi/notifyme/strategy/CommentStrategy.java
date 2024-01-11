@@ -21,7 +21,8 @@ public class CommentStrategy implements NotifyStrategy {
     public void process(NotifyBaseEvent event, NotifyMe setting) {
         Comment commentInfo = (Comment) event.getExtension();
         Comment.CommentSpec commentSpec = commentInfo.getSpec();
-        if (!commentSpec.getOwner().getName().equals("admin")) {
+        if (!commentSpec.getOwner().getName().equals("admin") &&
+            commentInfo.getMetadata().getDeletionTimestamp() == null) {  // 这里有点坑爹，删除文章了也发通知删除评论通知
             // 不是管理员的话就推送通知
             String postMetaName = commentSpec.getSubjectRef().getName();
             Optional<Post> postInfo = client.fetch(Post.class, postMetaName);
@@ -35,7 +36,6 @@ public class CommentStrategy implements NotifyStrategy {
                     }
                 }
             });
-
         }
     }
 

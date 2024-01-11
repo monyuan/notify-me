@@ -41,4 +41,7 @@ public class NotifyMe extends AbstractExtension {
     @Schema(defaultValue = "false")
     private Boolean postAuditsStatus; // 文章审核通知开关
 
+    @Schema(defaultValue = "false")
+    private Boolean postDelStatus; // 文章删除通知开关
+
 }

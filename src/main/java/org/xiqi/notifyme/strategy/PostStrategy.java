@@ -24,8 +24,6 @@ public class PostStrategy implements NotifyStrategy {
 
     private final PushUtil pushUtil;
 
-    private Integer counter = 0;
-
     @Override
     public void process(NotifyBaseEvent event, NotifyMe setting) {
         /*
@@ -36,11 +34,19 @@ public class PostStrategy implements NotifyStrategy {
         Extension extension = event.getExtension();
         ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
         executorService.schedule(() -> {
+            if (extension.getMetadata().getLabels().containsKey("content.halo.run/deleted") &&
+                extension.getMetadata().getLabels().get("content.halo.run/deleted").equals("true")
+            ) {
+                //删除文章到这里就终止了
+                delete((Post) extension, setting);
+                return;
+            }
             Optional<Post> postInfo = client.fetch(Post.class, extension.getMetadata().getName());
             postInfo.ifPresent(post -> {
                 if (post.getStatus().getPhase().equals("DRAFT") && !post.getSpec().getOwner()
                     .equals("admin")) { // 管理员的不管
                     audits(post, setting);
+                    return;
                 }
                 if (post.getStatus().getPhase().equals("PUBLISHED")) {
                     publish(post, setting);
@@ -54,9 +60,10 @@ public class PostStrategy implements NotifyStrategy {
     private void publish(Post post, NotifyMe setting) { // 文章发布通知
         if (setting.getPostStatus()) {
             String title = "有新文章发布";
-            String content = "您的站点有新文章发布：" + String.format("[%s](%s)",
+            String content = String.format("您的站点有新文章发布：[%s](%s)\n\n %s",
                 post.getSpec().getTitle(),
-                setting.getSiteUrl() + post.getStatus().getPermalink());
+                setting.getSiteUrl() + post.getStatus().getPermalink(),
+                getExcerpt(post.getStatus().getExcerpt()));
             push(title, content, setting);
         }
     }
@@ -64,8 +71,21 @@ public class PostStrategy implements NotifyStrategy {
     private void audits(Post post, NotifyMe setting) { // 文章审核通知
         if (setting.getPostAuditsStatus()) {
             String title = "有新文章待审核: " + post.getSpec().getTitle();
-            String content = "您的站点有新文文章等待审核，\n\n " + String.format("[立刻审核](%s)",
-                setting.getSiteUrl() + "/console/posts");
+            String content =
+                String.format("%s...\n\n%s", getExcerpt(post.getStatus().getExcerpt()),
+                    String.format("[立刻审核](%s)",
+                        setting.getSiteUrl() + "/console/posts"));
+            push(title, content, setting);
+        }
+    }
+
+    private void delete(Post post, NotifyMe setting) { // 文章删除通知
+        if (setting.getPostDelStatus()) {
+            String title = "文章被删除";
+            String content = String.format("您的站点有新文章被删除：[%s](%s)\n\n %s",
+                post.getSpec().getTitle(),
+                setting.getSiteUrl() + post.getStatus().getPermalink(),
+                getExcerpt(post.getStatus().getExcerpt()));
             push(title, content, setting);
         }
     }
@@ -75,6 +95,13 @@ public class PostStrategy implements NotifyStrategy {
         pushDo.setTitle(title);
         pushDo.setContent(content);
         pushUtil.sendRequest(pushDo, setting);
+    }
+
+    private String getExcerpt(String excerpt) {
+        if (excerpt.length() > 50) {
+            return excerpt.substring(0, 50) + "...";
+        }
+        return excerpt;
     }
 }
 
